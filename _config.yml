@@ -1,7 +1,7 @@
 title: "Eloy Salamanca"
 email: info@eloysalamanca.es
 timezone: Europe/Madrid
-baseurl: "https://eloysalamanca.es"
+baseurl: ""
 permalink: "/:categories/:slug/"
 logo: 'assets/images/logo.png'
 favicon: 'assets/images/favicon.ico'
