@@ -19,7 +19,7 @@ kramdown:
 sass:
   sass_dir: _sass
   style: :compressed
-ganalytics: #UA-113961478-1
+ganalytics: "G-D3YWTXZV4Q"
 
 # Comments
 comments:
@@ -43,7 +43,7 @@ authors:
     email: info@eloysalamanca.es
     web: https://eloysalamanca.es/
     twitter: https://twitter.com/EloySalamancaR
-    description: "I'm Eloy Salamanca Ramirez, Cloud Solution Architect @ brenntag. Opinions are my own."
+    description: "Cloud Solution Architect @ brenntag."<br>" Content as a result of my own enjoyments and searches."
 
 # Social
 social:
