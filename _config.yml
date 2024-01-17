@@ -1,13 +1,12 @@
 title: "Eloy Salamanca"
 email: info@eloysalamanca.es
 timezone: Europe/Madrid
-baseurl: ""
+baseurl: "https://eloysalamanca.es"
 permalink: "/:categories/:slug/"
 logo: 'assets/images/logo.png'
 favicon: 'assets/images/favicon.ico'
 author: eloy
 paginate: 10
-disqus: #'demowebsite'
 locale: en_us
 lang: en_us
 feed_items: 10
@@ -22,6 +21,19 @@ sass:
   style: :compressed
 ganalytics: #UA-113961478-1
 
+# Comments
+comments:
+  provider: "giscus"
+  giscus:
+    repo                 : "eloy-salamanca/eloy-salamanca.github.io"
+    repo_id              : "R_kgDOLFrWUA"
+    category             : "Announcements"
+    category_id          : "DIC_kwDOLFrWUM4Ccefp"
+    mapping              : "pathname" # (default), "url", "title", "og:title"
+    reactions_enabled    : '1' # for enabled (default), '0' for disabled
+    theme                : "light" # (default), "dark", "dark_dimmed", "transparent_dark", "preferred_color_scheme"
+disqus: #'demowebsite'
+
 # Authors
 authors:
   eloy:
@@ -31,7 +43,7 @@ authors:
     email: info@eloysalamanca.es
     web: https://eloysalamanca.es/
     twitter: https://twitter.com/EloySalamancaR
-    description: "Don't limit your challenges, challenge your limits'"
+    description: "I'm Eloy Salamanca Ramirez, Cloud Solution Architect @ brenntag. Opinions are my own."
 
 # Social
 social:
