@@ -1,5 +1,7 @@
-# Affiliates - Free Jekyll Theme
+# eloysalamanca.es - Cloud Enabler | Mind logging place
 
-[Live Demo](https://wowthemesnet.github.io/affiliates-jekyll-theme/) | [Docs & Download](https://bootstrapstarter.com/template-affiliates-bootstrap-jekyll/) |  [Buy me a coffee](https://www.wowthemes.net/donate/)
+## Logo
 
-![jekyll-affiliates-theme](https://bootstrapstarter.com/assets/img/themes/affiliates-jekyll.jpg)
+Font Name: Veteran Typewriter
+Font Description: Ink Free (Word)
+Font Color: 102, 0, 204 or #6600CC
