@@ -1,0 +1,57 @@
+title: "Eloy Salamanca"
+email: info@eloysalamanca.es
+timezone: Europe/Madrid
+baseurl: ""
+permalink: "/:categories/:slug/"
+logo: 'assets/images/logo.png'
+favicon: 'assets/images/favicon.ico'
+author: eloy
+paginate: 10
+disqus: #'demowebsite'
+locale: en_us
+lang: en_us
+feed_items: 10
+feed_update_period: daily
+feed_update_frequency: 1
+markdown: kramdown
+kramdown:
+  syntax_highlighter_opts:
+    disable: true
+sass:
+  sass_dir: _sass
+  style: :compressed
+ganalytics: #UA-113961478-1
+
+# Authors
+authors:
+  eloy:
+    name: Eloy
+    display_name: Eloy Salamanca
+    avatar: 'assets/images/eloy.png'
+    email: info@eloysalamanca.es
+    web: https://eloysalamanca.es/
+    twitter: https://twitter.com/EloySalamancaR
+    description: "Don't limit your challenges, challenge your limits'"
+
+# Social
+social:
+  linkedin: https://linkedin.com/in/eloysalamanca
+  instagram: #https://www.instagram.com/bootstrapstarter/
+  facebook: #https://www.facebook.com/bootstrapstartercom-346329609045284
+  twitter: https://twitter.com/EloySalamancaR
+  envelope: #mailto:info@eloysalamanca.es
+
+# Analytics
+analytics:
+  provider               : "google-gtag" # false (default), "google", "google-universal", "google-gtag", "custom"
+  google:
+    tracking_id          : "G-D3YWTXZV4Q"
+    anonymize_ip         : false
+
+# Plugins
+plugins: 
+- jekyll-paginate
+- jekyll-sitemap
+- jekyll-feed
+- jekyll-seo-tag
+- jekyll-archives

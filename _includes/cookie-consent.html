@@ -1,0 +1,77 @@
+<style>
+    #cookie-notice {
+        padding: 0.5rem 1rem; 
+        display: none; 
+        text-align: center; 
+        position: fixed; 
+        font:15px Courier,Arial,sans-serif; 
+        font-weight: bold; 
+        bottom: 0; 
+        width: calc(100%); 
+        background:#5a3c88; 
+        color: rgba(0,0,0,0.8);
+    }
+    #cookie-notice a {
+        display: inline-block;
+        cursor: pointer;
+        margin-left: 0.5rem;
+        font-size:20px;
+        color: rgba(255,255,255,0.8);
+    }
+    @media (max-width: 767px) {
+        #cookie-notice span {
+            display: block;
+            padding-top: 1px;
+            margin-bottom: 1rem;
+        }
+        #cookie-notice a {
+            position: relative;
+            bottom: 1px;
+        }
+    }
+</style>
+
+<div id="cookie-notice">
+    <span>This website uses cookies. If you continue, I assume you are happy with it ;-)</span>
+    <a id="cookie-notice-accept" class="btn btn-primary btn-sm">OK!</a>
+    <a href="/privacy" style="color:rgb(1,120,186);font:14px Courier,Arial,sans-serif; font-weight: bold;">More info</a>
+</div>
+<script>
+    function createCookie(name,value,days) {
+        var expires = "";
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days*24*60*60*1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + value + expires + "; path=/";
+    }
+    function readCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0;i < ca.length;i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1,c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+        }
+        return null;
+    }
+    function eraseCookie(name) {
+        createCookie(name,"",-1);
+    }
+
+    if(readCookie('cookie-notice-dismissed')=='true') {
+        {% if jekyll.environment == "production" and site.google_analytics_id %}
+            {% include ga.js %}
+            {% include chatbutton.js %}
+        {% endif %}
+    } else {
+        document.getElementById('cookie-notice').style.display = 'block';
+    }
+    document.getElementById('cookie-notice-accept').addEventListener("click",function() {
+        createCookie('cookie-notice-dismissed','true',31);
+        document.getElementById('cookie-notice').style.display = 'none';
+        location.reload();
+    });
+
+</script>
