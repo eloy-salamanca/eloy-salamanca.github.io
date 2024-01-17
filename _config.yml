@@ -32,7 +32,7 @@ comments:
     mapping              : "pathname" # (default), "url", "title", "og:title"
     reactions_enabled    : '1' # for enabled (default), '0' for disabled
     theme                : "light" # (default), "dark", "dark_dimmed", "transparent_dark", "preferred_color_scheme"
-disqus: #'demowebsite'
+#disqus: #'demowebsite'
 
 # Authors
 authors:
