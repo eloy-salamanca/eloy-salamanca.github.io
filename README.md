@@ -5,3 +5,7 @@
 Font Name: Veteran Typewriter  
 Font Description: Ink Free (Word)  
 Font Color: 102, 0, 204 or #6600CC  
+
+## Comments
+
+* Github > Repo > Discussions
