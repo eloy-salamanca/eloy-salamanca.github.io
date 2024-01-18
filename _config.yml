@@ -31,6 +31,7 @@ comments:
     category_id          : "DIC_kwDOLFrWUM4Ccefp"
     mapping              : "pathname" # (default), "url", "title", "og:title"
     reactions_enabled    : '1' # for enabled (default), '0' for disabled
+    metadata             : '1'
     theme                : "light" # (default), "dark", "dark_dimmed", "transparent_dark", "preferred_color_scheme"
 #disqus: #'demowebsite'
 
@@ -51,7 +52,7 @@ social:
   instagram: #https://www.instagram.com/bootstrapstarter/
   facebook: #https://www.facebook.com/bootstrapstartercom-346329609045284
   twitter: https://twitter.com/EloySalamancaR
-  envelope: #mailto:info@eloysalamanca.es
+  envelope: mailto:info@eloysalamanca.es
 
 # Analytics
 analytics:
