@@ -4,34 +4,16 @@ title: "Disk encryption Key rotation and File-level restore on Azure VMs"
 description: "Options and limitations of Disk Encryption Sets and Azure Disk Encryption when using key-rotation"
 categories: [ security, disks, encryption ]
 image: assets/img/2024/59.1.jpg
-featured: false
+featured: true
 author: eloy
 comments: true
 ---
 
 Header image by <a href="https://www.freepik.com/free-photo/html-css-collage-concept-with-person_36295465.htm#query=encryption&position=7&from_view=keyword&track=sph&uuid=a4992635-350c-4f04-ab1d-9e86bd081767">Freepik</a>
 
-- [Overview](#overview)
-- [1.Azure Disk Encryption (ADE)](#1azure-disk-encryption-ade)
-  - [Customer-managed keys and ADE](#customer-managed-keys-and-ade)
-  - [Limitations of Azure Disk Encryption (ADE)](#limitations-of-azure-disk-encryption-ade)
-- [2.Azure Disk Encryption Sets (DES)](#2azure-disk-encryption-sets-des)
-  - [Customer-managed keys and DES](#customer-managed-keys-and-des)
-  - [Advantages of DES](#advantages-of-des)
-  - [Disadvantages of Disk Encryption Sets (DES)](#disadvantages-of-disk-encryption-sets-des)
-- [3.Encryption at host](#3encryption-at-host)
-  - [Advantages of Encryption at host](#advantages-of-encryption-at-host)
-  - [Disadvantages of Encryption at host](#disadvantages-of-encryption-at-host)
-- [4.Confidential Disk Encryption](#4confidential-disk-encryption)
-  - [Advantages of Confidential disk encryption](#advantages-of-confidential-disk-encryption)
-  - [Disadvantages of Confidential disk encryption](#disadvantages-of-confidential-disk-encryption)
-- [Conclusions](#conclusions)
-
-{% include advertising/gl-adsense.html %}
-
 ## Overview
 
-One crucial pillar of [Azure Well-Architected Framework (WAF)](https://learn.microsoft.com/en-us/azure/well-architected/security/checklist) is **Security**, which, among other recommendations, advocates for the following two principles:
+One crucial pillar of [Azure Well-Architected Framework (WAF)](https://learn.microsoft.com/en-us/azure/well-architected/) is **Security**, which, among other recommendations, advocates for the following two principles:
 
 1. **Encrypt data *at-rest*** ([SE:07](https://learn.microsoft.com/en-us/azure/well-architected/security/encryption))
 2. **Rotating Keys** ([SE:09](https://learn.microsoft.com/en-us/azure/well-architected/security/application-secrets))
@@ -40,10 +22,10 @@ Adhering to these two principles, particularly in achieving the <ins>encryption 
 
 To make things a bit more challenging, in the realm of Backup/Restore activities in the Azure Cloud, while most software products supports complete restores of entire Azure VMs, the same cannot be said for **file-level restore**. This limitation leads to the need of a full restoration process of the entire disk to access a single file, turning the task into an expensive and time-consuming endeavor. Since the chosen method for encrypting disks is closely tied to the afroementioned statement, it becomes imperative to consider this aspect when selecting the appropiate method for encrypting and rotating keys:
 
-1. **Azure Disk Encryption (ADE)**
-2. **Azure Disk Encryption Sets (DES)**
-3. **Encryption at host**
-4. **Confidential Disk Encryption**
+1. [**Azure Disk Encryption (ADE)**](#1azure-disk-encryption-ade)
+2. [**Azure Disk Encryption Sets (DES)**](#2azure-disk-encryption-sets-des)
+3. [**Encryption at host**](#3encryption-at-host)
+4. [**Confidential Disk Encryption**](#4confidential-disk-encryption)
 
 ## 1.Azure Disk Encryption (ADE)
 
