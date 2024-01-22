@@ -1,13 +1,15 @@
 ---
 layout: post
 title: "Disk encryption Key rotation and File-level restore on Azure VMs"
-description: "Options and limitations of Disk Encryption Sets and Azure Disk Encryption when using key-rotation"
+description: "Choices and constraints in encrypting Azure VM disks and their impact on file-level restores"
 categories: [ security, disks, encryption ]
 image: assets/img/2024/59.1.jpg
 featured: true
 author: eloy
 comments: true
 ---
+
+Choices and constraints in encrypting Azure VM disks and their impact on file-level restores
 
 Header image by <a href="https://www.freepik.com/free-photo/html-css-collage-concept-with-person_36295465.htm#query=encryption&position=7&from_view=keyword&track=sph&uuid=a4992635-350c-4f04-ab1d-9e86bd081767">Freepik</a>
 
