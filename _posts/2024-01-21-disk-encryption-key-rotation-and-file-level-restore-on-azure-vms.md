@@ -15,14 +15,14 @@ Header image by <a href="https://www.freepik.com/free-photo/html-css-collage-con
 
 ## Overview
 
-One crucial pillar of [Azure Well-Architected Framework (WAF)](https://learn.microsoft.com/en-us/azure/well-architected/) is **Security**, which, among other recommendations, advocates for the following two principles:
+One crucial pillar of [Azure Well-Architected Framework (WAF)](https://learn.microsoft.com/en-us/azure/well-architected/) is **Security**. This involves a couple of important suggestions, like:
 
 1. **Encrypt data *at-rest*** ([SE:07](https://learn.microsoft.com/en-us/azure/well-architected/security/encryption))
 2. **Rotating Keys** ([SE:09](https://learn.microsoft.com/en-us/azure/well-architected/security/application-secrets))
 
-Adhering to these two principles, particularly in achieving the <ins>encryption data *at-rest* on disks belonging to Azure VMs</ins>, present us four different options, each with its own advantages and disadvantages, and I would like to delve into based on personal experience.
+Following these principles, especially when it comes to <ins>encryption data *at-rest* on disks belonging to Azure VMs</ins>, offers us four different options, each with its own pros and cons, and I would like to dive into these options based on personal experience.
 
-To make things a bit more challenging, in the realm of Backup/Restore activities in the Azure Cloud, while most software products supports complete restores of entire Azure VMs, the same cannot be said for **file-level restore**. This limitation leads to the need of a full restoration process of the entire disk to access a single file, turning the task into an expensive and time-consuming endeavor. Since the chosen method for encrypting disks is closely tied to the afroementioned statement, it becomes imperative to consider this aspect when selecting the appropiate method for encrypting and rotating keys:
+To make things a bit more challenging, in the realm of Backup/Restore operations in the Azure Cloud, while most software products support full restores of entire Azure VMs, the same isn't true for **file-level restore**. This limitation means having to through a complete restoration process of the entire disk just to get one file, turning the task into something costly and time-intensive. Given the close connection between the chosen disk encryption method and the mentioned scenario, it's crucial to factor this in when deciding the right approach for encrypting and rotating keys:
 
 1. [**Azure Disk Encryption (ADE)**](#1azure-disk-encryption-ade)
 2. [**Azure Disk Encryption Sets (DES)**](#2azure-disk-encryption-sets-des)
@@ -31,52 +31,52 @@ To make things a bit more challenging, in the realm of Backup/Restore activities
 
 ## 1.Azure Disk Encryption (ADE)
 
-This is basically encrypting the OS and data disks of Azure virtual machines (VMs) inside the VM by using the [DM-Crypt](https://wikipedia.org/wiki/Dm-crypt) (Linux) or the classical [BitLocker](https://wikipedia.org/wiki/BitLocker) (Windows), by default with one and only layer of encryption using **platform-managed keys**.
+This essentially involves encrypting both the OS and data disks of Azure virtual machines (VMs) within the VM itself. This is achieved using [DM-Crypt](https://wikipedia.org/wiki/Dm-crypt) (Linux) or the traditional [BitLocker](https://wikipedia.org/wiki/BitLocker) (Windows). The default configuration employs a single layer of encryption using **platform-managed keys**.
 
 ### Customer-managed keys and ADE
 
-It is possible to use **customer-managed keys** on ADE: [envelope encryption](https://learn.microsoft.com/en-us/azure/security/fundamentals/encryption-atrest#envelope-encryption-with-a-key-hierarchy), where a **Key Encryption Key (KEK)** (**customer-managed key**) encrypts a **Data Encryption Key (DEK)**, so we can store keys separated from those used to encrypt data, helping to ensure that the compromise of one entity doesn't affect the other.
+Using **customer-managed keys** with ADE is feasible through [envelope encryption](https://learn.microsoft.com/en-us/azure/security/fundamentals/encryption-atrest#envelope-encryption-with-a-key-hierarchy), where a **Key Encryption Key (KEK)** (**customer-managed key**) encrypts a **Data Encryption Key (DEK)**. This allows us to store keys separately from those used for data encryption, ensuring that the compromise of one entity doesn't impact the other.
 
 ### Limitations of Azure Disk Encryption (ADE)
 
-* Use of VM's CPU for encryption/decryption
-* Does not work for custom Linux images
-* **Key auto-rotation limitation** > To say it simple, <ins>**Azure Disk Encryption (ADE)** is not compatible with key auto-rotation</ins>.
+* Utilization of VM's CPU for encryption/decryption
+* Incompatibility with custom Linux images
+* **Key auto-rotation limitation** > To say it simple, <ins>**Azure Disk Encryption (ADE)** doesn't support key auto-rotation</ins>.
 
-The reason for this is that **ADE** will continue to use the original encryption key even after it has been auto-rotated. [https://learn.microsoft.com/en-us/azure/virtual-machines/windows/disk-encryption-key-vault?tabs=azure-portal#azure-disk-encryption-and-auto-rotations](https://learn.microsoft.com/en-us/azure/virtual-machines/windows/disk-encryption-key-vault?tabs=azure-portal#azure-disk-encryption-and-auto-rotations)
+This is because **ADE** persists in using the original encryption key even after it undergoes auto-rotation [https://learn.microsoft.com/en-us/azure/virtual-machines/windows/disk-encryption-key-vault?tabs=azure-portal#azure-disk-encryption-and-auto-rotations](https://learn.microsoft.com/en-us/azure/virtual-machines/windows/disk-encryption-key-vault?tabs=azure-portal#azure-disk-encryption-and-auto-rotations)
 
->*This leads to a dead end, as accessing VMs becomes impossible when original keys are disabled or removed due to expiration during a key-rotation.*
+>*This situation leads to a dead end, rendering VMs access impossible when the original keys are disabled or removed due to expiration during a key-rotation.*
 
-To make matters worse, <ins>it is not possible to migrate disks that have ever been encrypted with **Azure Disk Encryption** to another encryption method</ins>
+To make matters worse, <ins>it is not feasible to migrate disks that have ever been encrypted with **Azure Disk Encryption** to another encryption method</ins>
 
 ![ADE encrypted disk migration attempt to customer-keys]({{site.baseurl}}/assets/img/2023/59.2.png)
 
 {% include advertising/gl-adsense.html %}
 
-* **File-level restore limitation** > While it is feasible to restore entire VMs, as mentioned earlier, <ins>**ADE** encrypted VMs cannot be recovered at the file/folder level when utilizing [Azure Backup](https://learn.microsoft.com/en-us/azure/backup/backup-azure-vms-encryption#limitations) or [Veeam Backup for Azure](https://helpcenter.veeam.com/archive/vbazure/5a/guide/limitations.html#azure-disk-encryption-)</ins>
+* **File-level restore limitation** > While restoring entire VMs is an option, as mentioned earlier, <ins>**ADE** encrypted VMs cannot be recovered at the file/folder level when utilizing [Azure Backup](https://learn.microsoft.com/en-us/azure/backup/backup-azure-vms-encryption#limitations) or [Veeam Backup for Azure](https://helpcenter.veeam.com/archive/vbazure/5a/guide/limitations.html#azure-disk-encryption-)</ins>
 
 ## 2.Azure Disk Encryption Sets (DES)
 
-Most Azure **managed-disks** are encrypted with **Azure Storage Encryption**, which uses **Server-Side Encryption (SSE)**, and rely on **platform-managed keys** by default for the encryption.
+The majority of Azure **managed-disks** are encrypted with **Azure Storage Encryption**, employing **Server-Side Encryption (SSE)**, and relying on **platform-managed keys** by default for encryption.
 
 [Microsoft recommends using server-side encryption to protect your data for most scenarios](https://learn.microsoft.com/en-us/azure/storage/common/storage-service-encryption)
 
 ### Customer-managed keys and DES
 
-If you choose to configure your **managed-disks** with **Disk Encryption Set (DES)**, <ins>it will support **customer-managed keys**</ins>. This will provides you with the flexibility to change keys at your own, as this key is utilized to safeguard and control access to the key that encrypts your data.
+If you opt to configure your **managed-disks** with **Disk Encryption Set (DES)**, <ins>it will support **customer-managed keys**</ins>. This provides you with the flexibility to change keys as needed, as this key is used to secure and control access to the key encrypting your data.
 
 ### Advantages of DES
 
-* **Support for Key rotation on DES** > It also leverage **Envelope encryption**, generating a pair of **data-key** and **customer-managed key**, allowing you to rotate your keys without impacting the VMs. During key rotation, the Storage service re-encrypts the **data encryption keys** only with the new **customer-managed keys**.
+* **Support for Key rotation on DES** > It also leverage **Envelope encryption**, creating a pair of **data-key** and **customer-managed key**, enabling you to rotate your keys without affecting the VMs. During key rotation, the Storage service re-encrypts the **data encryption keys** only with the new **customer-managed keys**.
 
-I personally tested this scenario using various test VMs, and the outcomes after rotating the customer-managed key are the following:
+I personally tested this scenario using various test VMs, and the outcomes after rotating the customer-managed key are as follows:
 
-- If the VM is up and running, will continue working the same, without interruptions
-- If the VM is powered off after the rotation happened, a waiting period of one hour is necessary, as the disk requires re-encryption.
-- Data key, which remains consistent throughout the process, remains inaccessible nor visible at any level
-- Master key or customer-managed key, employed for encrypting the data key, is securely stored in the Key Vault allowing for both **manual or auto-rotation**.
+- If the VM is up and running, it continues working the same without interruptions.
+- If the VM is powered off after the rotation, a waiting period of one hour is necessary, as the disk requires re-encryption.
+- Data key, which remains consistent throughout the process, remains inaccessible and invisible at any level
+- Master key or customer-managed key, used for encrypting the data key, is securely stored in the Key Vault, allowing for both **manual or auto-rotation**.
 
-* **File-level restore on DES** > I tested this feature on VMs with disks associated to DES, both on **Veeam Backup for Azure** and **Azure Backup**:
+* **File-level restore on DES** > I tested this feature on VMs with disks associated with DES, both using **Veeam Backup for Azure** and **Azure Backup**:
 
 ![Veeam Backup for Azure file-level restore]({{site.baseurl}}/assets/img/2023/59.3.png)
 
@@ -96,7 +96,7 @@ For disks with encryption at host enabled, <ins>the server hosting the VM is res
 ### Advantages of Encryption at host
 
 * It enhances **Azure Disk Storage Server-Side Encryption**, ensuring that all **temp disks** and **disk caches** are also encrypted at rest. 
-* Possibility of **double encryption at rest** > This involves an additional layer of encryption utilizing a different encryption algorithm/mode at the infrastructure layer, employing **platform-managed encryption keys**. This is applicable only to persist OS and data disks, as well as snapshots and images.
+* Possibility of **double encryption at rest** > This involves an additional layer of encryption using a different encryption algorithm/mode at the infrastructure layer, employing **platform-managed encryption keys**. This is applicable only to persist OS and data disks, as well as snapshots and images.
 
 ### Disadvantages of Encryption at host
 
