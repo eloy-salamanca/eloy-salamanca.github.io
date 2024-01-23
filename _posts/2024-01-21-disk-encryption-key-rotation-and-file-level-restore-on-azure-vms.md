@@ -22,7 +22,7 @@ One crucial pillar of [Azure Well-Architected Framework (WAF)](https://learn.mic
 
 Following these principles, especially when it comes to <ins>encryption data *at-rest* on disks belonging to Azure VMs</ins>, offers us four different options, each with its own pros and cons, and I would like to dive into these options based on personal experience.
 
-To make things a bit more challenging, in the realm of Backup/Restore operations in the Azure Cloud, while most software products support full restores of entire Azure VMs, the same isn't true for **file-level restore**. This limitation means having to through a complete restoration process of the entire disk just to get one file, turning the task into something costly and time-intensive. Given the close connection between the chosen disk encryption method and the mentioned scenario, it's crucial to factor this in when deciding the right approach for encrypting and rotating keys:
+To make things a bit more challenging, in the realm of Backup/Restore operations in the Azure Cloud, while most software products support full restores of entire Azure VMs, the same isn't true for **file-level restore**. This limitation means having to go through a complete restoration process of the entire disk just to get one file, turning the task into something costly and time-intensive. Given the close connection between the chosen disk encryption method and the mentioned scenario, it's crucial to factor this in when deciding the right approach for encrypting and rotating keys:
 
 1. [**Azure Disk Encryption (ADE)**](#1azure-disk-encryption-ade)
 2. [**Azure Disk Encryption Sets (DES)**](#2azure-disk-encryption-sets-des)
