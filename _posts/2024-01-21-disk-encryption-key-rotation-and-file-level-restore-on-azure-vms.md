@@ -76,11 +76,7 @@ I personally tested this scenario using various test VMs, and the outcomes after
 - Data key, which remains consistent throughout the process, remains inaccessible and invisible at any level
 - Master key or customer-managed key, used for encrypting the data key, is securely stored in the Key Vault, allowing for both **manual or auto-rotation**.
 
-* **File-level restore on DES** > I tested this feature on VMs with disks associated with DES, both using **Veeam Backup for Azure** and **Azure Backup**, and it works like a charm:
-
-![Veeam Backup for Azure file-level restore]({{site.baseurl}}/assets/img/2023/59.3.png)
-
-![Azure Backups file-level restore]({{site.baseurl}}/assets/img/2023/59.4.png)
+* **File-level restore on DES** > I tested this feature on VMs with disks associated with DES, both using **Veeam Backup for Azure** and **Azure Backup**, and it works like a charm
 
 {% include advertising/gl-adsense.html %}
 
