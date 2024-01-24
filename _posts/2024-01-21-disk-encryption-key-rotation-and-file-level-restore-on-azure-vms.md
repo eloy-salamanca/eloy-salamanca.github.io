@@ -116,7 +116,7 @@ Associates the disk encryption keys to the VM's TPM, making them accessible only
 
 ## Conclusions
 
-1. **Disk Encryption Sets (ADE)** offer several advantages over **Azure Disk Encryption (ADE)**, including native support for file-level restores and comprehensive support for encryption key auto-rotation. Beyond being recommended by Microsoft, <ins>it appears to be the optimal choice for encrypting disks and aligning with key Security principles of the Well-Architect Framework</ins>. However, it is essential for Enterprise Security to carefully assess two significatn drawbacks: the inability of encrypting temp and cache disks, and the persistent unhealthy status reported by Microsoft Defender for Cloud.
+1. **Disk Encryption Sets (DES)** offer several advantages over **Azure Disk Encryption (DES)**, including native support for file-level restores and comprehensive support for encryption key auto-rotation. Beyond being recommended by Microsoft, <ins>it appears to be the optimal choice for encrypting disks and aligning with key Security principles of the Well-Architect Framework</ins>. However, it is essential for Enterprise Security to carefully assess two significatn drawbacks: the inability of encrypting temp and cache disks, and the persistent unhealthy status reported by Microsoft Defender for Cloud.
 
 4. **Encryption at host** is a closely related alternative to **Disk Encryption Set (ADE)**, focusing on the encryption of temp and cache disks. However, it has an unhealthy status on the Microsoft Defender Cloud, and comes with the limitation that Ultra Disks or Premium SSD v2 disks are not covered.
 
