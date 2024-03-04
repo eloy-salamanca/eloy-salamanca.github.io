@@ -4,7 +4,7 @@ title: "Disk encryption Key rotation and File-level restore on Azure VMs"
 description: "Choices and constraints in encrypting Azure VM disks and their impact on file-level restores"
 categories: [ security, disks, encryption ]
 image: assets/img/2024/59.1.jpg
-featured: true
+featured: false
 author: eloy
 comments: true
 ---
