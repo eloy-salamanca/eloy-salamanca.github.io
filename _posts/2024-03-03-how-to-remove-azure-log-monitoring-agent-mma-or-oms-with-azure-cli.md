@@ -38,7 +38,7 @@ Heartbeat
 
 Those reported with Category labeled as "Direct Agent" are our target (Log Analytics Agent, MMA or OMS, as you prefer to call it)
 
-![Checking Agents]({{site.baseurl}}/assets/img/2023/60.1.png)
+![Checking Agents]({{site.baseurl}}/assets/img/2024/60.1.png)
 
 {% include advertising/gl-adsense.html %}
 
@@ -80,7 +80,7 @@ az vm list -g $(echo $rg) --show-details --query "[*].{Name:name}" --output tsv 
 done
 ```
 
-![Checking Agents]({{site.baseurl}}/assets/img/2023/60.2.png)
+![Checking Agents]({{site.baseurl}}/assets/img/2024/60.2.png)
 
 From that on, it is also possible to loop through all resource-groups listed in a text file or even traverse all resource-groups within a subscription to automatically remove everything all at once! (ask for this option in the comments in you'd like to see it)
 
