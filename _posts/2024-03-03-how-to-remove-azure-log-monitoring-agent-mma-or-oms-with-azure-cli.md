@@ -1,7 +1,7 @@
 ---
 title: "How to remove Azure Log Monitoring Agent MMA or OMS massively with Azure CLI"
 description: "Options to remove Azure Log Monitoring Agent (MMA or OMS) individually and in bulk using Azure CLI"
-categories: [ monitoring ]
+categories: [ monitoring, azureCLI ]
 image: assets/img/2024/60.0.jpg
 featured: true
 author: eloy
@@ -9,6 +9,8 @@ comments: true
 ---
 
 Options to remove Azure Log Monitoring Agent (MMA or OMS) individually and in bulk using Azure CLI
+
+Header image by <a href="https://www.freepik.com/free-photo/finger-pressing-delete-key_944367.htm#fromView=search&page=1&position=0&uuid=df9eb214-de1b-4daf-83e9-4af345b38a52">Freepik</a>
 
 ## Overview
 
