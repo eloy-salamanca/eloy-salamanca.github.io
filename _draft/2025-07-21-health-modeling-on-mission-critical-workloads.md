@@ -17,10 +17,22 @@ Header image by <a href="https://www.freepik.com/free-photo/finger-pressing-dele
 ## Overview
 
 This design not only give you the health of the site, but also a little bit of sense of the architecture
-
 This design area focuses on the process to define a robust health model, mapping quantified application health states through observability and operational constructs to achieve operational maturity.
 
+## Mission-Critical workloads
+
+In the context of [*Well-Architected Framework from Microsoft*](https://learn.microsoft.com/en-us/azure/well-architected/):
+
+* **Workload** > Application resources to support common business goal or execute a common business process, including multiple services, working together to deliver specific end-to-end fucntionality.
+* **Mission-Critical** > Criticality scale that covers significat financial cost (business-critical), reputacion or human cost (safety-critical) associated with unavailability or underperformance.
+
+One of the key pilars to achieve such a levels of performance and availability is what is called **Health modeling and observability**.
+
 ## Layered application health
+
+Ref: [https://learn.microsoft.com/en-gb/azure/well-architected/mission-critical/mission-critical-health-modeling](https://learn.microsoft.com/en-gb/azure/well-architected/mission-critical/mission-critical-health-modeling)
+
+To build a health model, it is required a deep understanding and study of the intended Mission-Critical workload, with the following high-level steps:
 
 1. Define all user flows and map dependencies between functional and logical components.
 2. Define application health in the context of key business requirements by quantifying `healthy` and `unhealthy` (at all levels, important to distinguish between transient and non-transient failure states)
