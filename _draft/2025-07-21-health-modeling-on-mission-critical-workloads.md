@@ -34,12 +34,13 @@ Ref: [https://learn.microsoft.com/en-gb/azure/well-architected/mission-critical/
 
 To build a health model, it is required a deep understanding and study of the intended Mission-Critical workload, with the following high-level steps:
 
-1. Define all user flows and map dependencies between functional and logical components.
-2. Define application health in the context of key business requirements by quantifying `healthy` and `unhealthy` (at all levels, important to distinguish between transient and non-transient failure states)
-3. **Layered health model** > For each application component, refine the definition in the context of a steady running state and aggregated according to the application user flows.
-4. Superimpose with key non-functional business requirements for performance and availability.
-5. Performance testing > To define and continually evaluate application health.
-6. Finally, aggregate the health states for each individual user flow to form an acceptable representation of the overall application health.
+1. **Dependencies** > Define all user flows and map dependencies between functional and logical components, thereby mapping dependencies between Azure resources.
+2. **Availability** > Define application health in the context of key business requirements by quantifying `healthy` and `unhealthy` (at all levels, important to distinguish between transient and non-transient failure states)
+3. **Usability** > For each application component, refine the definition in the context of what each component does when the application is running normally, but describe them in the context of real user journeys through the system (not as standalone pieces).
+4. **Performance** > On top of the system design, add the business expectations for speed and reliability — make sure your component definitions also reflect how fast they must respond and how available they need to be.
+5. **Inform** > Finally, aggregate the health states for each individual user flow to form an acceptable representation of the overall application health, thus, should be used to inform critical monitoring metrics across all system components and validate operational subsystem composition.
+
+* Performance testing > To define and continually evaluate application health.
 
 > [!IMPORTANT]
 > Failures within a cloud solution may not happen in isolation. An outage in a single component may lead to several capabilities or additional components becoming unavailable.
