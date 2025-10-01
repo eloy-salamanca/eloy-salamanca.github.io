@@ -27,13 +27,15 @@ This design area focuses on the process to define a robust health model, mapping
 Install-Module -Name Az.Compute -AllowClobber -Force
 ```
 
+2. NSG: Allow outbound traffic to service tag `AzureMonitor` on HTTPS (port 443)
+
 2. Networking Requirements: The VM must be able to send outbound HTTPS traffic to Application Insights ingestion endpoints:
 ```
 dc.services.visualstudio.com
 *.applicationinsights.azure.com
 ```
 
-## Connection Application Insights to the intended VM
+### Connection Application Insights to the intended VM
 
 List of available extension name
 
@@ -58,9 +60,16 @@ Verify Installation
 az vm extension list --vm-name <VM_NAME> --resource-group <RESOURCE_GROUP> --output table
 ```
 
+### Test connectivity from source VM to Application Insights
 
+Force use of TLS1.2 version, the 
 
+```powerhsell
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+Invoke-WebRequest -Uri "https://dc.services.visualstudio.com" -UseBasicParsing
+```
 
+It should return 404 error page, which endpoint is reachable
 
 
 
